@@ -1,2 +1,2 @@
-docker-test-backend
+thought-machine-app
 ===================
