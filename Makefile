@@ -1,4 +1,4 @@
-.PHONY: clean clean_docker test run
+.PHONY: clean clean_docker test run base_container
 
 clean:
 	cd backend; make clean
@@ -7,6 +7,7 @@ clean:
 clean_docker:
 	cd backend; make clean_docker
 	cd frontend; make clean_docker
+	- sudo docker rmi oliviervg1:centos7
 	- sudo docker rmi centos:centos7
 
 test:
@@ -16,3 +17,6 @@ test:
 run:
 	cd backend; make run
 	cd frontend; make run
+
+base_container:
+	sudo docker build --rm -t="oliviervg1/centos7" .

@@ -1,8 +1,5 @@
-FROM centos:centos7
+FROM oliviervg1/centos7
 MAINTAINER Olivier Van Goethem <olivier-vg@outlook.com>
-RUN yum update -y && yum install python-setuptools -y
-RUN easy_install pip
-RUN pip install --upgrade pip
 ADD requirements.txt /opt/webapp/
 ADD ./src /opt/webapp/
 WORKDIR /opt/webapp
