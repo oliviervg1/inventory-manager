@@ -7,8 +7,7 @@ clean:
 clean_docker:
 	cd backend; make clean_docker
 	cd frontend; make clean_docker
-	- sudo docker rmi oliviervg1:centos7
-	- sudo docker rmi centos:centos7
+	- sudo docker rmi oliviervg1/centos7
 
 test:
 	cd backend; make test
