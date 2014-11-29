@@ -137,4 +137,18 @@ if __name__ == "__main__":
     if not os.path.exists("STATE_DIR/repos.db"):
         tables.metadata.create_all(engine)
 
+        # Add fixture data
+        session = Session()
+
+        living_room = Room("living-room")
+        tv = Item("TV", living_room, 80, "plasma screen", True)
+        couch = Item("couch", living_room, 200, "leather", False)
+
+        kitchen = Room("kitchen")
+        fridge = Item("fridge", kitchen, 100, "Samsung fridge", True)
+
+        session.add_all([living_room, couch, kitchen])
+        session.add_all([tv, kitchen, fridge])
+        session.commit()
+
     app.run(host="0.0.0.0", port=5000)
