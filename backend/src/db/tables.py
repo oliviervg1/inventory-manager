@@ -21,6 +21,7 @@ rooms = Table(
 items = Table(
     "items", metadata,
     Column("id", Integer, primary_key=True),
+    Column("name", Text, nullable=False),
     Column("room_id", Integer, ForeignKey("rooms.id"), nullable=False),
     Column("weight", Integer, nullable=False),
     Column("description", Text, nullable=False),
