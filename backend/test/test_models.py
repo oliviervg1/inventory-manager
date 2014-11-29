@@ -28,7 +28,7 @@ class ItemTestCase(unittest.TestCase):
 class TableMappingsTestCase(unittest.TestCase):
 
     def setUp(self):
-        engine = bind_session_engine('sqlite:///:memory:', echo=False)
+        engine = bind_session_engine("sqlite:///:memory:", echo=False)
         tables.metadata.create_all(engine)
         self.session = Session()
 
