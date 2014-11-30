@@ -4,6 +4,14 @@ body {
   padding-bottom: 20px;
 }
 
+h4 {
+  margin-top: 40px;
+}
+
+h5 {
+  margin-top: 20px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -72,4 +80,10 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.border {
+  padding-bottom: 19px;
+  padding-top: 19px;
+  border-top: 1px solid #e5e5e5;
 }

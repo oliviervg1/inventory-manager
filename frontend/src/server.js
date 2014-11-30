@@ -14,18 +14,10 @@ app.get('/', function(req, res) {
     ).done()
 });
 
-app.get('/rooms', function(req, res) {
-    backend.get('/rooms').then(
-        function(data) {
-            res.status(200).json(data)
-        }
-    ).done()
-});
-
 app.get('/manifest', function(req, res) {
     backend.get('/manifest').then(
         function(data) {
-            res.status(200).json(data)
+            res.render('manifest.ejs', {manifest: data});
         }
     ).done()
 });
