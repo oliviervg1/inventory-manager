@@ -199,3 +199,103 @@ class AppTestCase(unittest.TestCase):
                 }]
             }
         )
+
+    def test_generate_manifest(self):
+        # Add more fixture data
+        table = Item("table", self.room, 40, "wood", False)
+        couch = Item("couch", self.room, 200, "leather", False)
+        self.session.add_all([table, couch])
+
+        kitchen = Room("kitchen")
+        fridge = Item("fridge", kitchen, 100, "Samsung fridge", True)
+        cutlery = Item("cutlery", kitchen, 10, "Ikea", False)
+        plates = Item("plates", kitchen, 15, "Ikea", True)
+        self.session.add_all([kitchen, fridge, cutlery, plates])
+
+        self.session.commit()
+
+        r = self.app.get("/manifest")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(
+            json.loads(r.data),
+            {
+                "two_heaviest_items": {
+                    "living-room": [
+                        {
+                            "name": "couch",
+                            "description": "leather",
+                            "weight": 200,
+                            "is_fragile": False
+                        },
+                        {
+                            "name": "TV",
+                            "description": "plasma screen",
+                            "weight": 80,
+                            "is_fragile": True
+                        }
+                    ],
+                    "kitchen": [
+                        {
+                            "name": "fridge",
+                            "description": "Samsung fridge",
+                            "weight": 100,
+                            "is_fragile": True
+                        },
+                        {
+                            "name": "plates",
+                            "description": "Ikea",
+                            "weight": 15,
+                            "is_fragile": True
+                        }
+                    ]
+                },
+                "fragile_items": {
+                    "living-room": [
+                        {
+                            "name": "TV",
+                            "description": "plasma screen",
+                            "weight": 80,
+                            "is_fragile": True
+                        }
+                    ],
+                    "kitchen": [
+                        {
+                            "name": "fridge",
+                            "description": "Samsung fridge",
+                            "weight": 100,
+                            "is_fragile": True
+                        },
+                        {
+                            "name": "plates",
+                            "description": "Ikea",
+                            "weight": 15,
+                            "is_fragile": True
+                        }
+                    ]
+                },
+                "non_fragile_items": {
+                    "living-room": [
+                        {
+                            "name": "couch",
+                            "description": "leather",
+                            "weight": 200,
+                            "is_fragile": False
+                        },
+                        {
+                            "name": "table",
+                            "description": "wood",
+                            "weight": 40,
+                            "is_fragile": False
+                        }
+                    ],
+                    "kitchen": [
+                        {
+                            "name": "cutlery",
+                            "description": "Ikea",
+                            "weight": 10,
+                            "is_fragile": False
+                        }
+                    ]
+                }
+            }
+        )

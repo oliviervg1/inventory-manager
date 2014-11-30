@@ -125,6 +125,31 @@ def remove_item(room_name, item_name):
     return response
 
 
+@app.route("/manifest")
+def generate_manifest():
+    session = Session()
+    items = session.query(Item).order_by(sqlalchemy.desc(Item.weight)).all()
+
+    # Intermediate data struct - items keyed by room & weight descending order
+    metadata = defaultdict(list)
+    for i in items:
+        metadata[i.room.name].append(i.to_json())
+
+    data = {
+        "two_heaviest_items": {},
+        "fragile_items": {},
+        "non_fragile_items": {}
+    }
+    for key in metadata:
+        data["two_heaviest_items"][key] = metadata[key][:2]
+        data["fragile_items"][key] = [item for item in metadata[key]
+                                      if item["is_fragile"]]
+        data["non_fragile_items"][key] = [item for item in metadata[key]
+                                          if not item["is_fragile"]]
+
+    return jsonify(data)
+
+
 if __name__ == "__main__":
 
     if not os.path.exists("STATE_DIR"):
