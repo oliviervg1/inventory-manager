@@ -17,5 +17,9 @@ run:
 	cd backend; make run
 	cd frontend; make run
 
+run_locally:
+	cd backend; make run_locally &
+	cd frontend; make run_locally &
+
 base_container:
 	sudo docker build --rm -t="oliviervg1/centos7" .

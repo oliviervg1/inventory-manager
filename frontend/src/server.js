@@ -1,57 +1,34 @@
-var http = require('http'),
-    director = require('director'),
+var express = require('express'),
     ejs = require('ejs'),
-    fs = require('fs');
+    backend = require('./lib/backend');
 
-var viewDir = __dirname + '/views/';
+var app = express();
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 
-function index() {
-    var that = this;
-    ejs.renderFile(viewDir + 'index.ejs', function (err, output) {
-        if (err) {
-           throw err;
+app.get('/', function(req, res) {
+    backend.get('/rooms').then(
+        function(data) {
+            res.render('index.ejs', {rooms: data});
         }
-        that.res.writeHead(200, {
-            'Content-Type': 'text/html',
-        });
-        that.res.end(output);
-    });
-}
-
-function serveStatic(path) {
-    fs.readFile(__dirname + '/static/' + path, function(error, contents) {
-        this.res.writeHead(200, {
-            'Content-Type': 'text/css'
-        });
-        this.res.end(contents);
-    }.bind(this));
-}
-
-function status() {
-    this.res.writeHead(200, { 'Content-Type': 'text/plain' })
-    this.res.end('status: ok');
-}
-
-var router = new director.http.Router({
-    '/': {
-        get: index
-    },
-    '/static/(.+)': {
-        get: serveStatic
-    },
-    '/status': {
-        get: status
-    }
+    ).done()
 });
 
-var server = http.createServer(function (request, response) {
-    router.dispatch(request, response, function (err) {
-      if (err) {
-        response.writeHead(404);
-        response.end();
-      }
-    });
+app.get('/rooms', function(req, res) {
+    backend.get('/rooms').then(
+        function(data) {
+            res.status(200).json(data)
+        }
+    ).done()
 });
 
-server.listen(5001);
+app.get('/manifest', function(req, res) {
+    backend.get('/manifest').then(
+        function(data) {
+            res.status(200).json(data)
+        }
+    ).done()
+});
+
+app.listen(5001);
 console.log('Listening on ' + 5001);

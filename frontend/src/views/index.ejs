@@ -1,27 +1,61 @@
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
-</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thought Machine App</title>
 
-<body>
-<div class="body">
-  <section>
-    <h1>Hello World!</h1>
-  </section>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-  <section>
-    <h2>Have some bacon:</h2>
-    <p>Bacon ipsum dolor sit amet short loin turducken jowl, pork loin pork pork belly doner prosciutto venison pastrami chuck hamburger shankle. Pastrami rump venison tail filet mignon, doner fatback pork loin. Prosciutto short ribs cow t-bone capicola bacon jowl rump doner. Pork chop andouille jowl turducken doner turkey drumstick swine. Pork chop frankfurter pork kevin. Chuck cow biltong tongue tail bacon pork loin jerky meatloaf. Brisket biltong flank, pork chop bacon ham pig ribeye doner tri-tip.</p>
-    <p>Ribeye fatback meatloaf capicola tri-tip pork sausage pig shankle pastrami. Boudin biltong tenderloin salami cow. Frankfurter pork belly ham turducken, tongue turkey pastrami tail fatback beef. Brisket meatball biltong, rump andouille chicken shankle doner ribeye t-bone chuck pork chop. Fatback sirloin ham, swine ground round pastrami biltong salami rump tongue pork belly. Flank kielbasa short ribs pancetta turkey meatball jowl beef ham hock rump ground round strip steak brisket venison.</p>
-    <p>Bacon beef ribs pancetta shankle chicken shank rump meatball. Doner meatloaf turkey tongue short loin, ribeye salami tri-tip. Strip steak tail bacon ball tip boudin prosciutto. Pork corned beef sausage capicola, tenderloin t-bone tongue tri-tip swine kevin kielbasa drumstick prosciutto pork loin rump.</p>
-    <p>Capicola pig brisket ham hock tenderloin tri-tip pork. Meatloaf kevin brisket meatball. Venison short loin frankfurter boudin ribeye. Fatback kielbasa corned beef t-bone meatball flank boudin prosciutto chuck short ribs spare ribs meatloaf beef ribs pork.</p>
-    <p>Jerky brisket shank, tenderloin prosciutto meatloaf rump flank turkey doner tongue ball tip. Biltong filet mignon turkey strip steak, kevin hamburger pork chop kielbasa jowl short ribs shankle salami capicola prosciutto. Filet mignon drumstick short ribs, pork beef ribs strip steak pig tongue t-bone rump jerky pork belly salami. Chuck biltong swine shankle.</p>
-    <p>Ut meatball bresaola venison ground round brisket hamburger shank pariatur. Capicola nisi brisket, meatball sint ex nostrud leberkas short loin labore cillum rump ad ribeye. Commodo eiusmod ullamco, bacon tail mollit spare ribs. Leberkas quis pork chop rump minim, ex dolor sausage adipisicing jowl. Laborum sunt shankle nostrud bacon. Kevin nulla hamburger nostrud chuck biltong dolore magna cillum.</p>
-    <p>Pig sirloin prosciutto spare ribs chicken. Dolore eiusmod rump pig bacon, sed sint swine fugiat adipisicing. Consectetur ham hock magna aliquip in ut chuck dolore venison. Sed leberkas pariatur tail consequat tri-tip id exercitation consectetur doner tenderloin spare ribs.</p>
-    <p>Hamburger corned beef ribeye tempor tail, swine labore dolore t-bone jowl beef. Commodo pastrami cupidatat tri-tip pork chop biltong ham pork. Consectetur ad ullamco, sint meatloaf mollit strip steak pork esse ex corned beef qui. Venison shoulder consequat t-bone, ullamco tempor et pork chop rump dolore pork belly ground round veniam bresaola aliqua. Mollit pork chop ullamco beef ribs. Shank voluptate drumstick culpa.</p>
-    <p>Nulla occaecat in bresaola dolore incididunt kevin enim et fugiat deserunt sausage consectetur shoulder sed. Shoulder andouille meatloaf laboris eiusmod ut cow flank consequat pastrami kevin. Aute nulla commodo kevin frankfurter, ham kielbasa reprehenderit non enim pancetta ullamco. Adipisicing anim minim ut, shoulder chuck culpa spare ribs exercitation tongue pork loin bacon. Non bacon duis deserunt chuck aute. Pig aliqua cupidatat jowl adipisicing kevin labore.</p>
-    <p>Incididunt beef ribs labore cupidatat jerky tempor short ribs tail cow duis in fatback pancetta. Swine esse ut ea, proident enim tongue eiusmod prosciutto anim capicola pork belly in leberkas bacon. Sint consequat pig ex cupidatat. Ribeye cillum ullamco brisket consectetur, deserunt ham hock meatball eu in id chicken consequat proident. In sunt flank, tenderloin sausage laboris brisket shank ea shankle cillum shoulder beef ribs ut.</p>
-  </section>
-</div>
-</body>
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Thought Machine App</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>Home Removals Item Manager</h1>
+        <p class="lead">App to record the contents of someone's house.</p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+          <% for(var room_name in rooms) { %>
+            <h4><%= room_name.toUpperCase() %></h4>
+            <% rooms[room_name].forEach(function(item) { %>
+              <h5><%= item.name.toUpperCase() %></h5>
+              <p>
+                <b>Description:</b> <%= item.description %> -
+                <b>Weight:</b> <%= item.weight %>kg -
+                <b>Is fragile?</b> <%= item.is_fragile %>
+              </p>
+            <% }); %>
+          <% } %>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Olivier Van Goethem 2014</p>
+      </footer>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  </body>
 </html>

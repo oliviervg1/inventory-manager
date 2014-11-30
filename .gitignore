@@ -1,4 +1,5 @@
 *STATE_DIR/
+*node_modules/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
