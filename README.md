@@ -5,7 +5,7 @@ Item Inventory Manager
 1. Git clone project.
 2. Install docker.io - https://docs.docker.com/installation/ubuntulinux/.
   1. On Ubuntu 14.04 or above it should be as simple as ```sudo apt-get install docker.io```.
-3. From the project root folder, run ```make run```.
+3. From the project root folder, run ```make run```. It might ask for your password, as docker requires sudo access.
 4. Access application via [http://localhost:5001/](http://localhost:5001/).
 5. Once finished, run ```make clean clean_docker``` to remove any traces.
 
