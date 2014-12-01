@@ -6,6 +6,7 @@
     "dependencies": {
         "ejs": "~1.0.0",
         "express": "~4.10.4",
+        "body-parser": "~1.9.3",
         "request": "~2.40.0",
         "q": "~1.0.1"
     },

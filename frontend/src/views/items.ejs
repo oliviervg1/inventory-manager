@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include partials/head.ejs %>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Thought Machine App</h3>
+      </div>
+
+      <% include partials/jumbotron.ejs %>
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+          <h4 class="border">MANAGE ITEMS</h4>
+          <form role="form" method="post" action="/items">
+            <div class="form-group">
+              <label for="itemName">Name</label>
+              <input name="name" type="text" class="form-control" id="itemName" placeholder="Enter item name">
+            </div>
+            <div class="form-group">
+              <label for="itemRoom">Room</label>
+              <input name="room" type="text" class="form-control" id="itemRoom" placeholder="Enter room item is in">
+            </div>
+            <div class="form-group">
+              <label for="itemDescription">Description</label>
+              <input name="description" type="text" class="form-control" id="itemDescription" placeholder="Enter item description">
+            </div>
+            <div class="form-group">
+              <label for="itemWeight">Weight</label>
+              <input name="weight" type="number" class="form-control" id="itemWeight" placeholder="Enter item weight">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="is_fragile" type="checkbox"> Is fragile?
+              </label>
+            </div>
+            <button type="submit" class="btn btn-default">Add item</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <% include partials/footer.ejs %>
+      </footer>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
