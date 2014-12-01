@@ -2,11 +2,11 @@ Item Inventory Manager
 ======================
 
 ### How to run it
-- Git clone project
+- Git clone project.
 - Install docker.io - https://docs.docker.com/installation/ubuntulinux/
-- From the project root folder, run ```make run```
+- From the project root folder, run ```make run```.
 - Access application via http://localhost:5001/
-- Once finished, run ```make clean clean_docker``` to remove any traces
+- Once finished, run ```make clean clean_docker``` to remove any traces.
 
 ### Features
 - Python Flask backend with REST api. Uses sqlite3 to store data.
