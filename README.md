@@ -6,6 +6,7 @@ Item Inventory Manager
 - Install docker.io - https://docs.docker.com/installation/ubuntulinux/
 - From the project root folder, run ```make run```
 - Access application via http://localhost:5001/
+- Once finished, run ```make clean clean_docker``` to remove any traces
 
 ### Features
 - Python Flask backend with REST api. Uses sqlite3 to store data.
