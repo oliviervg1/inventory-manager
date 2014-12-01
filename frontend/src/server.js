@@ -1,7 +1,7 @@
 var express = require('express'),
     ejs = require('ejs'),
     bodyParser = require('body-parser'),
-    backend = require('./lib/backend');
+    backend = require('./util/backend');
 
 var app = express();
 app.set('view engine', 'ejs');
