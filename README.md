@@ -16,5 +16,6 @@ Item Inventory Manager
 
 ### Quirks
 - Frontend is not tested and has poor error handling :(
+- Backend is missing json schema validation.
 - You need to create a Room before being able to add Items to it.
 - The frontend does not allow you to delete Rooms and Items. However this can be done using the REST api.
