@@ -12,6 +12,7 @@ Item Inventory Manager
 ### Features
 - Python Flask backend with REST api. Uses sqlite3 to store data.
 - Node.js Express frontend. Uses bootstrap for simple styling.
+- Backend and frontend run in isolated Centos7 docker containers.
 
 ### Quirks
 - Frontend is not tested and has poor error handling :(
