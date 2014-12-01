@@ -1,6 +1,5 @@
 import os
 import sqlalchemy
-from collections import defaultdict
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
@@ -48,10 +47,10 @@ def key_error(error):
 @app.route("/rooms")
 def get_rooms_and_their_content():
     session = Session()
+    rooms = session.query(Room).all()
     items = session.query(Item).all()
-    data = defaultdict(list)
-    for i in items:
-        data[i.room.name].append(i.to_json())
+    data = {room.name: [i.to_json() for i in items if i.room.name == room.name]
+            for room in rooms}
     return jsonify(data)
 
 
@@ -128,23 +127,23 @@ def remove_item(room_name, item_name):
 @app.route("/manifest")
 def generate_manifest():
     session = Session()
+    rooms = session.query(Room).all()
     items = session.query(Item).order_by(sqlalchemy.desc(Item.weight)).all()
 
     # Intermediate data struct - items keyed by room & weight descending order
-    metadata = defaultdict(list)
-    for i in items:
-        metadata[i.room.name].append(i.to_json())
+    d = {room.name: [i.to_json() for i in items if i.room.name == room.name]
+         for room in rooms}
 
     data = {
         "two_heaviest_items": {},
         "fragile_items": {},
         "non_fragile_items": {}
     }
-    for key in metadata:
-        data["two_heaviest_items"][key] = metadata[key][:2]
-        data["fragile_items"][key] = [item for item in metadata[key]
+    for key in d:
+        data["two_heaviest_items"][key] = d[key][:2]
+        data["fragile_items"][key] = [item for item in d[key]
                                       if item["is_fragile"]]
-        data["non_fragile_items"][key] = [item for item in metadata[key]
+        data["non_fragile_items"][key] = [item for item in d[key]
                                           if not item["is_fragile"]]
 
     return jsonify(data)
